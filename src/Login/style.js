@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { right } from "styled-system";
 
 export default StyleSheet.create({
   container: {
@@ -14,15 +15,20 @@ export default StyleSheet.create({
     gap: '10px'
   },
 
+  logButton: {
+    borderRadius: "10px"
+  },
+
   FPButton: {
     width: "40%",
     borderRadius: "100px",
     alignSelf: "center",
-    borderColor: "black"
+    borderColor: "grey"
   },
 
   FPtitle: {
     color: "black",
-    fontSize: "12px"
+    fontSize: "10px",
+    fontWeight: "bold"
   }
 })
