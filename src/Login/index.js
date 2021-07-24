@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { Input, Button, Text } from 'react-native-elements'
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/core';
+import axios from 'axios';
 import styles from './style'
 
 export default class Login extends React.Component {
@@ -20,7 +21,19 @@ export default class Login extends React.Component {
   }
 
   loginFunction () {
-    return this.props.navigation.navigate('Home')
+    const loginData = {
+      username: this.state.username,
+      password: this.state.password
+    }
+
+    axios.post('http://localhost:3333/login', loginData)
+      .then(res => {
+        console.log(res)
+        this.props.navigation.navigate('Home', { userId: res })
+    }).catch(err => alert(err))
+
+
+    return 
 }
 
   render () {
