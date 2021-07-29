@@ -18,7 +18,7 @@ const LogoutButton = () => <TouchableOpacity><Icon/></TouchableOpacity>
 export default function App() {
   return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="CriarOcorrencia">
+        <Stack.Navigator initialRouteName="Login">
           <Stack.Screen name="Login" component={Login} options={{ headerShown: false }}/>
           <Stack.Screen name="Home" component={Home} options={{ headerShown: true, headerTitle: "Ocorrências", headerBackground: CustomHeader, headerTintColor: "#fff" }}/>
           <Stack.Screen name="CriarOcorrencia" component={CriarOcorrencia} options={{ headerShown: true, headerTitle: "Nova ocorrência", headerStyle: { backgroundColor: 'white' }, headerTransparent: true, headerTintColor: "black", headerTitleAlign: 'center' }}/>

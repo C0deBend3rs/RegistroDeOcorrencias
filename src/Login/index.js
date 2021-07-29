@@ -28,10 +28,8 @@ export default class Login extends React.Component {
 
     axios.post('http://localhost:3333/users/login', loginData)
       .then(res => {
-        console.log(res)
-        this.props.navigation.navigate('Home', { userId: res })
+        this.props.navigation.navigate('Home', { userId: res.data.id })
     }).catch(err => alert(err))
-
 
     return 
 }
