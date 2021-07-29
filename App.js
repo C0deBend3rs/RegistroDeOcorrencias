@@ -1,13 +1,12 @@
 import React from 'react';
-import Login from './src/Login'
-import Home from './src/Home'
+import Login from './src/Login';
+import Home from './src/Home';
 import CriarOcorrencia from './src/CriarOcorrencia';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { LinearGradient } from 'expo-linear-gradient';
 import { TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
-
 
 const Stack = createStackNavigator()
 

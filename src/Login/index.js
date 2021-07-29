@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { Input, Button } from 'react-native-elements'
+import { Input, Button } from 'react-native-elements';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/core';
 import axios from 'axios';
-import styles from './style'
+import styles from './style';
 
 export default class Login extends React.Component {
   state: {

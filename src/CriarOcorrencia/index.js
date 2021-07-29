@@ -1,10 +1,10 @@
-import React from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
-import { Picker } from '@react-native-picker/picker'
-import { Input, Icon, Button } from 'react-native-elements'
-import { LinearGradient } from 'expo-linear-gradient'
-import axios from 'axios'
-import styles from './style'
+import React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
+import { Input, Icon, Button } from 'react-native-elements';
+import { LinearGradient } from 'expo-linear-gradient';
+import axios from 'axios';
+import styles from './style';
 
 export default class CriarOcorrencia extends React.Component {
   state: {

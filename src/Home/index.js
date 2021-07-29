@@ -1,9 +1,9 @@
-import React from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
-import { Button, Icon } from 'react-native-elements'
-import { LinearGradient } from 'expo-linear-gradient'
-import axios from 'axios'
-import styles from './style'
+import React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { Button, Icon } from 'react-native-elements';
+import { LinearGradient } from 'expo-linear-gradient';
+import axios from 'axios';
+import styles from './style';
 
 export default class Home extends React.Component {
   state: {
@@ -21,7 +21,7 @@ export default class Home extends React.Component {
     // Função que pega lista de ocorrências vai aqui
     // Por hora vamos fazer hardcoded mesmo
 
-    axios.get('http://localhost:3333/users')
+    axios.get('http://localhost:3333/ocorrencias')
       .then(res => {
         console.log(res.data);
         this.setState({ocorrencias: res.data})
@@ -34,12 +34,12 @@ export default class Home extends React.Component {
       <View style={styles.container}>
         {this.state.ocorrencias.map((ocorr, key) => {
           return (
-            <Button buttonStyle={styles.ocorrButton} type='outline' key={ocorr.id} title={ ocorr.username }/>
+            <Button buttonStyle={styles.ocorrButton} type='outline' key={ocorr.id} title={ ocorr.titulo }/>
           )
         })}
 
         <LinearGradient style={styles.addButtonGrad}  colors={['#6C92F4', '#1A73E9']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
-          <TouchableOpacity style={styles.addButton} onPress={() => this.props.navigation.navigate('CriarOcorrencia')}>
+          <TouchableOpacity style={styles.addButton} onPress={() => this.props.navigation.navigate('CriarOcorrencia', { userId: this.props.route.params.userId })}>
             <Icon name="plus" type="font-awesome-5" color="white" size="20px" />
           </TouchableOpacity>
         </LinearGradient>
