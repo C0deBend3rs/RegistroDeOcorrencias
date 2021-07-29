@@ -2,7 +2,21 @@ import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { Input, Icon, Button } from 'react-native-elements'
 import { LinearGradient } from 'expo-linear-gradient'
+import { TreeSelect } from 'antd'
 import styles from './style'
+
+const data = [
+  {
+  title: 'Teste',
+  value: '1',
+    children: [
+      {
+        title: 'Sou o filhinho',
+        value: '2'
+      }
+    ]
+  }
+]
 
 export default class CriarOcorrencia extends React.Component {
   state: {
@@ -27,6 +41,7 @@ export default class CriarOcorrencia extends React.Component {
         <View style={styles.inputDiv}>
           <Input containerStyle={styles.inputBox} inputContainerStyle={styles.inputContainer} labelStyle={styles.label} label="Título"/>
           <Input multiline containerStyle={styles.inputBox} inputContainerStyle={styles.inputContainer} inputStyle={{ height: '100px' }} labelStyle={styles.label} label="Descrição" />
+          <TreeSelect treeData={data} />
         </View>
 
         <View style={styles.buttonsDiv}>

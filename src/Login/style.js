@@ -29,5 +29,12 @@ export default StyleSheet.create({
     color: "black",
     fontSize: "10px",
     fontWeight: "bold"
+  },
+
+  titleStyle: {
+    marginTop: "15%",
+    color: "#1A73E9",
+    fontWeight: "bold",
+    fontSize: "24px" 
   }
 })

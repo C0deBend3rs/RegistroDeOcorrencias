@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { Button, Icon } from 'react-native-elements'
 import { LinearGradient } from 'expo-linear-gradient'
+import axios from 'axios'
 import styles from './style'
 
 export default class Home extends React.Component {
@@ -19,37 +20,13 @@ export default class Home extends React.Component {
   componentDidMount () {
     // Função que pega lista de ocorrências vai aqui
     // Por hora vamos fazer hardcoded mesmo
-    const hardcodedOcorr = [
-      {
-        titulo: 'teste0'
-      },
-      {
-        titulo: 'teste1'
-      },
-      {
-        titulo: 'teste2'
-      },
-      {
-        titulo: 'teste3'
-      },
-      {
-        titulo: 'teste5'
-      },
-      {
-        titulo: 'teste6'
-      },
-      {
-        titulo: 'teste7'
-      },
-      {
-        titulo: 'teste8'
-      },
-      {
-        titulo: 'teste9'
-      }
-    ]
 
-    this.setState({ocorrencias: hardcodedOcorr})
+    axios.get('http://localhost:3333/users')
+      .then(res => {
+        console.log(res.data);
+        this.setState({ocorrencias: res.data})
+      })
+      .catch(err => alert("Erro ao acessar lista de ocorrências"))
   }
 
   render () {
@@ -57,7 +34,7 @@ export default class Home extends React.Component {
       <View style={styles.container}>
         {this.state.ocorrencias.map((ocorr, key) => {
           return (
-            <Button buttonStyle={styles.ocorrButton} type='outline' key={ocorr.titulo} title={ ocorr.titulo }/>
+            <Button buttonStyle={styles.ocorrButton} type='outline' key={ocorr.id} title={ ocorr.username }/>
           )
         })}
 
