@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { alignSelf, borderBottom } from "styled-system";
+import { alignSelf, borderBottom, fontWeight, marginBottom, marginLeft } from "styled-system";
 
 export default StyleSheet.create({
   container: {
@@ -45,8 +45,7 @@ export default StyleSheet.create({
     height: '100%',
     justifyContent: "center",
     alignItems: 'center',
-    borderRadius: '50%',
-    cursor: 'not-allowed'
+    borderRadius: '50%'
   },
 
   photosButtons: {
@@ -60,5 +59,36 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-evenly',
     justifySelf: 'flex-end'
+  },
+
+  pickerTitle: {
+    fontSize: '16px',
+    fontWeight: 'bold',
+    alignSelf: 'flex-start',
+    marginLeft: '4%',
+    marginBottom: '5px'
+  },
+
+  pickerTitleDisabled: {
+    fontSize: '16px',
+    fontWeight: 'bold',
+    alignSelf: 'flex-start',
+    marginLeft: '4%',
+    marginBottom: '5px',
+    color: 'grey'
+  },
+
+  pickerDiv: {
+    height: 'auto',
+    width: '100%',
+    alignItems: 'center'
+  },
+
+  picker: {
+    width: '95%',
+    height: '35px',
+    borderRadius: '5px',
+    fontSize: '18px',
+    backgroundColor: 'white'
   }
 })

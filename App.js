@@ -4,7 +4,6 @@ import Home from './src/Home'
 import CriarOcorrencia from './src/CriarOcorrencia';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { NativeBaseProvider } from 'native-base';
 import { LinearGradient } from 'expo-linear-gradient';
 import { TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
@@ -18,12 +17,12 @@ const LogoutButton = () => <TouchableOpacity><Icon/></TouchableOpacity>
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="CriarOcorrencia">
-        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }}/>
-        <Stack.Screen name="Home" component={Home} options={{ headerShown: true, headerTitle: "Ocorrências", headerBackground: CustomHeader, headerTintColor: "#fff" }}/>
-        <Stack.Screen name="CriarOcorrencia" component={CriarOcorrencia} options={{ headerShown: true, headerTitle: "Nova ocorrência", headerStyle: { backgroundColor: 'white' }, headerTransparent: true, headerTintColor: "black", headerTitleAlign: 'center' }}/>
-      </Stack.Navigator>
-    </NavigationContainer>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="CriarOcorrencia">
+          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }}/>
+          <Stack.Screen name="Home" component={Home} options={{ headerShown: true, headerTitle: "Ocorrências", headerBackground: CustomHeader, headerTintColor: "#fff" }}/>
+          <Stack.Screen name="CriarOcorrencia" component={CriarOcorrencia} options={{ headerShown: true, headerTitle: "Nova ocorrência", headerStyle: { backgroundColor: 'white' }, headerTransparent: true, headerTintColor: "black", headerTitleAlign: 'center' }}/>
+        </Stack.Navigator>
+      </NavigationContainer>
   );
 }
