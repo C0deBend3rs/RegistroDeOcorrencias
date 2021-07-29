@@ -26,7 +26,7 @@ export default class CriarOcorrencia extends React.Component {
     this.state = {
       titulo: '',
       desc: '',
-      prioridade: '',
+      prioridade: 1,
       instituicao: -1,
       filial: -1,
       predio: -1,
