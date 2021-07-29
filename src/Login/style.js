@@ -11,18 +11,23 @@ export default StyleSheet.create({
     flex: 1,
     width: '90%',
     justifyContent: 'center',
-    gap: '10px'
   },
 
   logButton: {
-    borderRadius: "10px"
+    borderRadius: "10px",
+    marginBottom:"10px",
+    marginTop: "10px"
+  },
+
+  placeHolder: {
+    marginBottom:"10px"
   },
 
   FPButton: {
     width: "40%",
     borderRadius: "100px",
     alignSelf: "center",
-    borderColor: "grey"
+    borderColor: "grey",
   },
 
   FPtitle: {
