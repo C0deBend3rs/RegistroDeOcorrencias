@@ -6,14 +6,15 @@ export default StyleSheet.create({
     height: '100%',
     backgroundColor: 'white',
     paddingTop: '10px',
-    gap: '10px'
   },
 
   ocorrButton: {
     flex: 1,
     width: '90%',
     borderRadius: '20px',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginBottom : '10px',
+    marginTop: "10px"
   },
 
   addButtonGrad: {
@@ -25,6 +26,8 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: 'center',
     borderRadius: '50%',
+    marginBottom : '10px',
+    marginTop: "10px"
   },
 
   addButton: {
@@ -32,6 +35,6 @@ export default StyleSheet.create({
     height: '100%',
     justifyContent: "center",
     alignItems: 'center',
-    borderRadius: '50%'
+    borderRadius: '50%',
   }
 });
