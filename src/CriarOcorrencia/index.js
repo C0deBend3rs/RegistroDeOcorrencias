@@ -5,13 +5,12 @@ import { Input, Icon, Button } from 'react-native-elements';
 import { LinearGradient } from 'expo-linear-gradient';
 import axios from 'axios';
 import styles from './style';
-import { Alert } from 'react-native';
 
 export default class CriarOcorrencia extends React.Component {
   state: {
     titulo: String,
     desc: String,
-    prioridade: Number,
+    prioridade: String,
     instituicao: Number,
     filial: Number,
     predio: Number,
@@ -33,7 +32,7 @@ export default class CriarOcorrencia extends React.Component {
     this.state = {
       titulo: '',
       desc: '',
-      prioridade: 1,
+      prioridade: 'Alta',
       instituicao: -1,
       filial: -1,
       predio: -1,
@@ -277,15 +276,15 @@ export default class CriarOcorrencia extends React.Component {
     const ocorrencia = {
       titulo: this.state.titulo,
       desc: this.state.desc,
+      prioridade: this.state.prioridade,
       comodo: this.state.comodo,
       espaco: this.state.espaco,
       userId: this.props.route.params.userId
     }
-
+    console.log(ocorrencia)
     await axios.post('http://localhost:3333/ocorrencias/', ocorrencia)
       .then(res => {
-        console.log(res.data)
-        Alert.alert('Ocorrência criada com sucesso')
+        alert("Ocorrência criada com sucesso")
     }).catch(err => alert('Falha ao criar ocorrência'))
   }
 
