@@ -25,7 +25,6 @@ export default class VerOcorrencia extends React.Component {
 
     await axios.get('http://localhost:3333/ocorrencias/' + this.props.route.params.ocorrId)
         .then(res => {
-        console.log(res.data);
         this.setState({ocorrencia: res.data})
         })
         .catch(err => alert("Erro ao receber ocorrência"))

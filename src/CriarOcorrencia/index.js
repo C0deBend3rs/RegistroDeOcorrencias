@@ -5,6 +5,7 @@ import { Input, Icon, Button } from 'react-native-elements';
 import { LinearGradient } from 'expo-linear-gradient';
 import axios from 'axios';
 import styles from './style';
+import { Alert } from 'react-native';
 
 export default class CriarOcorrencia extends React.Component {
   state: {
@@ -88,7 +89,6 @@ export default class CriarOcorrencia extends React.Component {
     await axios.get('http://localhost:3333/instituicoes/' + this.props.route.params.userId)
         .then(res => {
           res.data.unshift(this.state.nenhum)
-          console.log('inst pos unshift: ', res.data)
           this.setState({
             instituicoes: res.data
           })
@@ -206,10 +206,9 @@ export default class CriarOcorrencia extends React.Component {
           this.setState({predios: res.data}) 
         }).catch(err => alert(err))
       
-      console.log('ANTES')
+      
       await axios.get('http://localhost:3333/espaco-aberto/' + this.state.filial)
         .then(res => {
-          console.log(res.data)
           res.data.unshift(this.state.nenhum)
           this.setState({espacos: res.data}) 
         }).catch(err => alert(err))
@@ -226,10 +225,8 @@ export default class CriarOcorrencia extends React.Component {
     await this.setState({ predio: value })
     
     if (value != -1) {
-      console.log('ANTES COMODO')
       await axios.get('http://localhost:3333/comodos/' + this.state.predio)
         .then(res => {
-          console.log("COMODO :", res.data)
           res.data.unshift(this.state.nenhum)
           this.setState({comodos: res.data}) 
         }).catch(err => alert(err))
@@ -287,7 +284,8 @@ export default class CriarOcorrencia extends React.Component {
 
     await axios.post('http://localhost:3333/ocorrencias/', ocorrencia)
       .then(res => {
-      console.log("DEU BOM", res.data)
+        console.log(res.data)
+        Alert.alert('Ocorrência criada com sucesso')
     }).catch(err => alert('Falha ao criar ocorrência'))
   }
 

@@ -21,9 +21,8 @@ export default class Home extends React.Component {
     // Função que pega lista de ocorrências vai aqui
     // Por hora vamos fazer hardcoded mesmo
 
-    await axios.get('http://localhost:3333/ocorrencias')
+    await axios.get('http://localhost:3333/ocorrencias/user/' + this.props.route.params.userId)
       .then(res => {
-        console.log(res.data);
         this.setState({ocorrencias: res.data})
       })
       .catch(err => alert("Erro ao acessar lista de ocorrências"))
