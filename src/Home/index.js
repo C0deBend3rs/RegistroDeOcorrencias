@@ -34,7 +34,7 @@ export default class Home extends React.Component {
       <View style={styles.container}>
         {this.state.ocorrencias.map((ocorr, key) => {
           return (
-            <Button buttonStyle={styles.ocorrButton} type='outline' key={ocorr.id} title={ ocorr.titulo }/>
+            <Button onPress={() => this.props.navigation.navigate('Ocorrencia', {ocorrId: ocorr.id, ocorrTitle: ocorr.titulo})} buttonStyle={styles.ocorrButton} type='outline' key={ocorr.id} title={ ocorr.titulo }/>
           )
         })}
 
