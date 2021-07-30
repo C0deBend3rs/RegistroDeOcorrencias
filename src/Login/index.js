@@ -20,13 +20,13 @@ export default class Login extends React.Component {
     }
   }
 
-  loginFunction () {
+  async loginFunction () {
     const loginData = {
       username: this.state.username,
       password: this.state.password
     }
 
-    axios.post('http://localhost:3333/users/login', loginData)
+    await axios.post('http://localhost:3333/users/login', loginData)
       .then(res => {
         this.props.navigation.navigate('Home', { userId: res.data.id })
     }).catch(err => alert(err))

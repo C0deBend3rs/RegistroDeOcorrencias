@@ -17,11 +17,11 @@ export default class Home extends React.Component {
     }
   }
 
-  componentDidMount () {
+  async componentDidMount () {
     // Função que pega lista de ocorrências vai aqui
     // Por hora vamos fazer hardcoded mesmo
 
-    axios.get('http://localhost:3333/ocorrencias')
+    await axios.get('http://localhost:3333/ocorrencias')
       .then(res => {
         console.log(res.data);
         this.setState({ocorrencias: res.data})

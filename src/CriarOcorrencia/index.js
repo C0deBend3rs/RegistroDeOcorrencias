@@ -22,6 +22,8 @@ export default class CriarOcorrencia extends React.Component {
     predios: Array,
     espacos: Array,
     comodos: Array,
+
+    nenhum: Object,
   }
 
   constructor(props: Props) {
@@ -37,102 +39,60 @@ export default class CriarOcorrencia extends React.Component {
       espaco: -1,
       comodo: -1,
 
+      nenhum: {
+        id: -1,
+        nome: 'Nenhum'
+      },
+
       //ENUMS
-      prioridades: [
+      prioridades: ['Alta', 'Média', 'Baixa'],
+
+      instituicoes: [
         {
-          label: "Alta",
-          value: 1
-        },
-        {
-          label: "Média",
-          value: 2
-        },
-        {
-          label: "Baixa",
-          value: 3
+          id: -1,
+          nome: 'Nenhum'
         }
       ],
 
-      instituicoes: [],
-      filiais: [],
-      predios: [],
-      espacos: [],
-      comodos: []
+      filiais: [
+        {
+          id: -1,
+          nome: 'Nenhum'
+        }
+      ],
+      
+      predios: [
+        {
+          id: -1,
+          nome: 'Nenhum'
+        }
+      ],
+      
+      espacos: [
+        {
+          id: -1,
+          nome: 'Nenhum'
+        }
+      ],
+      
+      comodos: [
+        {
+          id: -1,
+          nome: 'Nenhum'
+        }
+      ]
     }
   }
 
   async componentDidMount () {
-    const nenhum = {
-      label: 'Nenhum',
-      value: -1
-    }
-
-    var instituicoes = [
-        {
-          label: "A",
-          value: 1
-        },
-        {
-          label: "B",
-          value: 2
-        }
-    ]
-
-    var filiais = [
-        {
-          label: "C",
-          value: 1
-        },
-        {
-          label: "D",
-          value: 2
-        }
-    ]
-      
-    var predios = [
-      {
-        label: "E",
-        value: 1
-      },
-      {
-        label: "F",
-        value: 2
-      }
-    ]
-      
-    var espacos = [
-      {
-        label: "1",
-        value: 1
-      },
-      {
-        label: "2",
-        value: 2
-      }
-    ]
-      
-    var comodos = [
-      {
-        label: "1",
-        value: 1
-      },
-      {
-        label: "2",
-        value: 2
-      }
-    ]
-
-    instituicoes.unshift(nenhum)
-    filiais.unshift(nenhum)
-    predios.unshift(nenhum)
-    espacos.unshift(nenhum)
-    comodos.unshift(nenhum)
-
-    this.setState({instituicoes: instituicoes})
-    this.setState({predios: predios})
-    this.setState({filiais: filiais})
-    this.setState({espacos: espacos})
-    this.setState({comodos: comodos})
+    await axios.get('http://localhost:3333/instituicoes/' + this.props.route.params.userId)
+        .then(res => {
+          res.data.unshift(this.state.nenhum)
+          console.log('inst pos unshift: ', res.data)
+          this.setState({
+            instituicoes: res.data
+          })
+        }).catch(err => alert(err))
   }
 
   renderFilial () {
@@ -142,12 +102,12 @@ export default class CriarOcorrencia extends React.Component {
         <Picker
           style={styles.picker}
           selectedValue={this.state.filial}
-          onValueChange={(value) => this.setState({ filial: value })}
+          onValueChange={(value) => this.filialChange(value)}
           enabled={this.isEnabled('filial')}
         >
           {this.state.filiais.map(obj => {
             return (
-              <Picker.Item key={obj.value} label={obj.label} value={obj.value}/>
+              <Picker.Item key={obj.id} label={obj.nome} value={obj.id}/>
             )
           })}
         </Picker>
@@ -162,12 +122,12 @@ export default class CriarOcorrencia extends React.Component {
         <Picker
           style={styles.picker}
           selectedValue={this.state.predio}
-          onValueChange={(value) => this.setState({ predio: value })}
+          onValueChange={(value) => this.predioChange(value)}
           enabled={this.isEnabled('predio')}
         >
           {this.state.predios.map(obj => {
             return (
-              <Picker.Item key={obj.value} label={obj.label} value={obj.value}/>
+              <Picker.Item key={obj.id} label={obj.nome} value={obj.id}/>
             )
           })}
         </Picker>
@@ -182,12 +142,12 @@ export default class CriarOcorrencia extends React.Component {
         <Picker
           style={styles.picker}
           selectedValue={this.state.espaco}
-          onValueChange={(value) => this.setState({ espaco: value })}
+          onValueChange={(value) => this.espacoChange(value)}
           enabled={this.isEnabled('espaco')}
         >
           {this.state.espacos.map(obj => {
             return (
-              <Picker.Item key={obj.value} label={obj.label} value={obj.value}/>
+              <Picker.Item key={obj.id} label={obj.nome} value={obj.id}/>
             )
           })}
         </Picker>
@@ -202,12 +162,12 @@ export default class CriarOcorrencia extends React.Component {
         <Picker
           style={styles.picker}
           selectedValue={this.state.comodo}
-          onValueChange={(value) => this.setState({ comodo: value })}
+          onValueChange={(value) => this.comodoChange(value)}
           enabled={this.isEnabled('comodo')}
         >
           {this.state.comodos.map(obj => {
             return (
-              <Picker.Item key={obj.value} label={obj.label} value={obj.value}/>
+              <Picker.Item key={obj.id} label={obj.nome} value={obj.id}/>
             )
           })}
         </Picker>
@@ -215,12 +175,16 @@ export default class CriarOcorrencia extends React.Component {
     )
   }
 
-  instituicaoChange (value) {
-    this.setState({instituicao: value})
-    /* if (value != -1) {
-      axios.get('http://localhost:3333/filiais/' + this.props.params.userId)
+  async instituicaoChange (value) {
+    await this.setState({ instituicao: value })
+    
+    if (value != -1) {
+      await axios.get('http://localhost:3333/filiais/' + this.state.instituicao)
         .then(res => {
-          this.setState({filiais: res.data}) 
+          res.data.unshift(this.state.nenhum)
+          this.setState({
+            filiais: res.data
+          })
         }).catch(err => alert(err))
     } else {
       this.setState({
@@ -229,41 +193,51 @@ export default class CriarOcorrencia extends React.Component {
         comodo: -1,
         espaco: -1
       })
-    } */
+    }
   }
   
-  filialChange (value) {
-    this.setState({filial: value})
-    /* if (value != -1) {
-      axios.get('http://localhost:3333/predios/' + this.props.params.userId)
+  async filialChange (value) {
+    await this.setState({ filial: value })
+    
+    if (value != -1) {
+      await axios.get('http://localhost:3333/predios/' + this.state.filial)
         .then(res => {
-          this.setState({filiais: res.data}) 
+          res.data.unshift(this.state.nenhum)
+          this.setState({predios: res.data}) 
+        }).catch(err => alert(err))
+      
+      console.log('ANTES')
+      await axios.get('http://localhost:3333/espaco-aberto/' + this.state.filial)
+        .then(res => {
+          console.log(res.data)
+          res.data.unshift(this.state.nenhum)
+          this.setState({espacos: res.data}) 
         }).catch(err => alert(err))
     } else {
       this.setState({
-        filial: -1,
         predio: -1,
         comodo: -1,
         espaco: -1
       })
-    } */
+    }
   }
 
-  predioChange (value) {
-    this.setState({predio: value})
-    /* if (value != -1) {
-      axios.get('http://localhost:3333/comodos/' + this.props.params.userId)
+  async predioChange (value) {
+    await this.setState({ predio: value })
+    
+    if (value != -1) {
+      console.log('ANTES COMODO')
+      await axios.get('http://localhost:3333/comodos/' + this.state.predio)
         .then(res => {
-          this.setState({filiais: res.data}) 
+          console.log("COMODO :", res.data)
+          res.data.unshift(this.state.nenhum)
+          this.setState({comodos: res.data}) 
         }).catch(err => alert(err))
     } else {
       this.setState({
-        filial: -1,
-        predio: -1,
-        comodo: -1,
-        espaco: -1
+        comodo: -1
       })
-    } */
+    }
   }
 
   espacoChange (value) {
@@ -302,16 +276,19 @@ export default class CriarOcorrencia extends React.Component {
     }
   }
 
-  criarOcorrencia () {
+  async criarOcorrencia () {
     const ocorrencia = {
       titulo: this.state.titulo,
       desc: this.state.desc,
       comodo: this.state.comodo,
       espaco: this.state.espaco,
-      userId: this.props.params.userId
+      userId: this.props.route.params.userId
     }
 
-    axios.post('http://localhost:3333/ocorrencias/' + this.props.params.userId)
+    await axios.post('http://localhost:3333/ocorrencias/', ocorrencia)
+      .then(res => {
+      console.log("DEU BOM", res.data)
+    }).catch(err => alert('Falha ao criar ocorrência'))
   }
 
   render () {
@@ -344,7 +321,7 @@ export default class CriarOcorrencia extends React.Component {
             >
               {this.state.prioridades.map(obj => {
                 return (
-                  <Picker.Item key={obj.value} label={obj.label} value={obj.value}/>
+                  <Picker.Item key={obj} label={obj} value={obj}/>
                 )
               })}
             </Picker>
@@ -359,7 +336,7 @@ export default class CriarOcorrencia extends React.Component {
             >
               {this.state.instituicoes.map(obj => {
                 return (
-                  <Picker.Item key={obj.value} label={obj.label} value={obj.value}/>
+                  <Picker.Item key={obj.id} label={obj.nome} value={obj.id}/>
                 )
               })}
             </Picker>
@@ -384,7 +361,7 @@ export default class CriarOcorrencia extends React.Component {
             </TouchableOpacity>
             </LinearGradient>
           </View>
-          <Button onPress={this.criarOcorrencia} disabled={!this.isEnabled('button')} title="Criar ocorrência" ViewComponent={LinearGradient}
+          <Button onPress={() => this.criarOcorrencia()} disabled={!this.isEnabled('button')} title="Criar ocorrência" ViewComponent={LinearGradient}
               linearGradientProps={{
                 colors: ['#6C92F4', '#1A73E9'],
                 start: { x: 0, y: 0 },
