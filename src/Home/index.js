@@ -67,13 +67,13 @@ export default class Home extends React.Component {
           <SpeedDial.Action
             color="#1A73E9"
             icon={{ name: "redo-alt", type: "font-awesome-5", color: "white", size: '20px' }}
-            title="Refresh"
+            title="Atualizar"
             onPress={() => {this.fetchList(); this.setState({sdOpen: false})}}
           />
           <SpeedDial.Action
             color="#1A73E9"
             icon={{ name: "plus", type: "font-awesome-5", color: "white", size: '20px' }}
-            title="Add"
+            title="Adicionar ocorrência"
             onPress={() => {this.props.navigation.navigate('CriarOcorrencia', { userId: this.props.route.params.userId }); this.setState({sdOpen: false})}}
           />
           </SpeedDial >
