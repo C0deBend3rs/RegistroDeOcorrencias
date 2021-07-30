@@ -29,6 +29,15 @@ export default class VerOcorrencia extends React.Component {
         })
         .catch(err => alert("Erro ao receber ocorrência"))
     }
+
+    async deletarOcorrencia () {
+        await axios.delete('http://localhost:3333/ocorrencias/' + this.props.route.params.ocorrId)
+        .then(res => {
+            alert("Ocorrência removida com sucesso!")
+        }).catch(err => {
+            alert("Falha ao remover ocorrência")
+        })
+    }
     
     render () {
         return (
@@ -49,11 +58,12 @@ export default class VerOcorrencia extends React.Component {
                     </Text>
                 </View>
                 <View style={styles.buttonDiv}>
-                    <Button 
-                    title="REMOVER OCORRÊNCIA"
-                    type="outline"
-                    titleStyle={{color: '#000000',  fontWeight: 'bold'}}
-                    buttonStyle={{borderColor: '#CCCCCC' , width: '95vw', borderRadius: '10px'}}/>
+                    <Button
+                        onPress={() => this.deletarOcorrencia()}
+                        title="REMOVER OCORRÊNCIA"
+                        type="outline"
+                        titleStyle={{color: '#000000',  fontWeight: 'bold'}}
+                        buttonStyle={{borderColor: '#CCCCCC' , width: '95vw', borderRadius: '10px'}}/>
                 </View>
             </View>
         )
