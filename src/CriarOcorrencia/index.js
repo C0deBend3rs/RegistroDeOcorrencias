@@ -281,7 +281,7 @@ export default class CriarOcorrencia extends React.Component {
       espaco: this.state.espaco,
       userId: this.props.route.params.userId
     }
-    console.log(ocorrencia)
+    
     await axios.post('http://localhost:3333/ocorrencias/', ocorrencia)
       .then(res => {
         alert("Ocorrência criada com sucesso")
